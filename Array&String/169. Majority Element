@@ -1,0 +1,25 @@
+Better Solution -> Using Map. 
+Time complexity: O(N) in worst case, If all elements are unique.
+Space complexity: O(N) As we are using Map to store the count of element. If all elements are unique then Space Complexity is O(N) 
+var majorityElement = function(nums) {
+    let map = new Map();
+
+    for(let i = 0; i < nums.length; i++) {
+        let key = nums[i];
+        let value = map.get(key);
+        if(map.has(key)) {
+            map.set(key, value + 1);
+        } else {
+            map.set(key, 1);
+        }
+    }
+    let count = 0;
+    let maxKey = 0;
+    for(const [key, value] of map) {
+        if(value > count){
+            count = value;
+            maxKey = key;
+        }
+    }
+    return maxKey;
+};
