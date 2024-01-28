@@ -1,3 +1,49 @@
+Moore's Voting Algorithm: 
+Step 1: Assume your first element is your majority element and start counting it.
+Step 2: If you found same element as your majority element the in count do +1 / ++;
+Step 3: If you found different element than your majority element do -1 / --;
+Step 4: if our count becomes Zero then then it set our next element as new majority element.
+Note: Intution: -> let say [1, 1, 2, 1, 2, 3, 1, 1, 1] is my array and 1 majority element. and count = 0
+      Now i am doing  count=1 => count=1+1 => count=2-1 => count=1+1 => count= 2-1 => count= 1-1 = 0,
+        now that we have increase 3 time and decrease 3 time means there our element was not majority one 
+        if it was then there would be greater than 1 of count, 
+        count=1 => count1+1= count=2+1 => count=3 means 
+*if majority element exists than its 1 and no one else* 
+what if our array was like this [1, 1, 2, 1, 2, 3, 11, 11, 11] it means no element is majority element and none of the element appeared more than n/2  times.
+Now in our question its said that our majority element is in majority if its count is greater than n/2 
+Example: if we have 8 elements then our majority count should me more than 4.
+
+Optimal Soltion: 
+var majorityElement = function(nums) {
+    let ele;
+    let count = 0;
+    let n = nums.length;
+    for(let i = 0; i < n; i++) {
+        if(count === 0) {
+            count=1;
+            ele=nums[i]
+        } else if(nums[i] === ele) {
+            count++;
+        } else {
+            count--;
+        }
+    }
+
+    let max = 0;
+    for(let i = 0; i < n; i++) {
+        if(ele === nums[i]) {
+            max++;
+        }
+    }
+    if(max > Math.floor(n / 2) ){
+        return ele;
+    }
+   return -1
+};
+
+
+
+
 Better Solution -> Using Map. 
 Time complexity: O(N) in worst case, If all elements are unique.
 Space complexity: O(N) As we are using Map to store the count of element. If all elements are unique then Space Complexity is O(N) 
